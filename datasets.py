@@ -13,8 +13,11 @@
         your required classes.
     4. Please donot forget to include the changes in the config file.
 """
-from torchvision import dataset as dset
+import torch
 from torchvision import transforms as transforms
+from torchvision import dataset as dset
+from config import dataset, dataset_path, dataset_classes, image_size, \
+     center_crop, batch_size, workers
 
 
 class Dataset:
@@ -25,26 +28,36 @@ class Dataset:
         dataset_classes: list of classes [None,{'train', 'val', 'test'},[]]
     """
 
-    def __init__(self, datapath,
-                 dataset_name='LSUN',
-                 dataset_classes=None,
-                 image_size=64,
-                 center_crop=64,
-                 ):
-        self.dataset_name = dataset_name
-        self.dataset_classes = dataset_classes
-        self.image_size = image_size
-        self.center_crop = center_crop
-        self.datapath = datapath
+    def __init__(self):
+        if dataset:
+            self.dataset_name = dataset
+        else:
+            self.dataset_name = 'LSUN'
+        assert dataset_path
+        self.data_path = dataset_path
+        if dataset_classes:
+            self.dataset_classes = dataset_classes
+        else:
+            self.dataset_classes = None
+        if image_size:
+            self.image_size = image_size
+        else:
+            self.image_size = 64
+        if center_crop:
+            self.center_crop = center_crop
+        else:
+            self.center_crop = 64
 
-    def from_dataset(self):
+    def get_data(self):
         """
             This method calls the specified method for a certain dataset.
             Please don't forget to call your dataset method here.
         """
         if self.dataset_name == 'LSUN':
             dataset = self.lsun(self.dataset_classes)
-        return dataset
+        return torch.utils.data.DataLoader(dataset, batch_size=batch_size,
+                                           shuffle=True,
+                                           num_workers=int(workers))
 
     def lsun(self):
         """
@@ -58,7 +71,7 @@ class Dataset:
             updated_classes = self.dataset_classes
         else:
             updated_classes = 'train'
-        dataset = dset.LSUN(root=self.datapath, classes=updated_classes,
+        dataset = dset.LSUN(root=self.data_path, classes=updated_classes,
                             transform=transforms.Compose([
                                 transforms.Resize(self.image_size),
                                 transforms.CenterCrop(self.center_crop),

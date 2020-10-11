@@ -6,3 +6,7 @@
 
 from __future__ import print_function
 from datasets import Dataset
+
+# Dataset loading
+data_loader = Dataset()
+loaded_data = data_loader.get_data()
