@@ -15,7 +15,7 @@
 """
 import torch
 from torchvision import transforms as transforms
-from torchvision import dataset as dset
+from torchvision import datasets as dset
 from config import dataset, dataset_path, dataset_classes, image_size, \
      center_crop, batch_size, workers
 
@@ -54,7 +54,7 @@ class Dataset:
             Please don't forget to call your dataset method here.
         """
         if self.dataset_name == 'LSUN':
-            dataset = self.lsun(self.dataset_classes)
+            dataset = self.lsun()
         return torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                            shuffle=True,
                                            num_workers=int(workers))
