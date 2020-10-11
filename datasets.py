@@ -54,7 +54,7 @@ class Dataset:
             Please don't forget to call your dataset method here.
         """
         if self.dataset_name == 'LSUN':
-            dataset = self.lsun(self.dataset_classes)
+            dataset = self.lsun()
         return torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                            shuffle=True,
                                            num_workers=int(workers))
