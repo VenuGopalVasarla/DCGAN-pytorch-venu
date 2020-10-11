@@ -15,7 +15,7 @@
 """
 import torch
 from torchvision import transforms as transforms
-from torchvision import dataset as dset
+from torchvision import datasets as dset
 from config import dataset, dataset_path, dataset_classes, image_size, \
      center_crop, batch_size, workers
 
