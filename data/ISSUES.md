@@ -8,6 +8,6 @@
 'verify_str_arg' is not valid function for classes argument when used with list type.
 
 ## Fix:
-In order to fix this error caused by torchvision, please remove/comment the function
+In order to fix this error caused by torchvision, please remove/comment the function inside the file  /pythonx.x/site-packages/torchvision/dataset/lsun.py
             
             #verify_str_arg(c, custom_msg=msg_fmtstr.format(type(c)))
