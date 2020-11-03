@@ -24,4 +24,10 @@ batch_size = 64  # input batch size to use; default: 64
 latent_vector = 100  # size of input latent vector; default: 100
 gen_size = 64  # size of outputs for generator to be considered; default: 64
 dis_size = 64  # size ofinputs for discriminator; default: 64
+CPU = False  # If training is to be done on CPU.
 num_gpus = 1  # num of GPUs to use; default: 1
+
+if CPU:
+    device = "cpu"
+else:
+    device = "cuda:0"

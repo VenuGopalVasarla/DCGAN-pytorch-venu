@@ -71,7 +71,7 @@ class Generator(nn.Module):
 class Discriminator(nn.Module):
     """
         This class creates and a simple discriminator neural network.
-        Uses ReLU transforms and batchnorm after every conv layer.
+        Uses leaky ReLU transforms and batchnorm after every conv layer.
         inputs:
             num_gpu: number of gpus used, default: 1
             input: [for forward method] input to the neural net.
