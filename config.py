@@ -17,7 +17,7 @@ if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 if not os.path.exists(dataset_path):
     raise Exception('The dataset path does not exist. Provide a valid path')
-
+num_classes = len(dataset_classes)
 # train configurations:
 workers = 2  # num of workers used for loading data; default: 2
 batch_size = 64  # input batch size to use; default: 64
