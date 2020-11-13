@@ -12,6 +12,7 @@ dataset_classes = ['bridge']  # classes for dataset; default: '[bridge]'
 image_size = 64  # image size for the N/Ws; default: 64
 center_crop = 64  # center crops for dataset transform; default: 64
 out_dir = 'data/results'  # output path to save results; default: 'data/out'
+num_channels = 3  # number of channels for each image in the dataset
 
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
@@ -32,6 +33,7 @@ loss = "BCE"  # loss to be used. default: Binary Cross Entropy
 optimizer = "adam"  # optimizer to be used. default: Adam
 lr = 0.0002  # learning rate. default: 0.0002
 beta = 0.5  # beta1 value for the optimizer, default: 0.5
+num_epochs = 10  # Number of iterations to be done.
 
 if CPU:
     device = "cpu"

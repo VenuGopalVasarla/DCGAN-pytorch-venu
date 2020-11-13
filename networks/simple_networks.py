@@ -1,5 +1,5 @@
 import torch.nn as nn
-from config import latent_vector, gen_size, num_classes, num_gpus, dis_size
+from config import latent_vector, gen_size, num_channels, num_gpus, dis_size
 
 
 class Generator(nn.Module):
@@ -45,7 +45,7 @@ class Generator(nn.Module):
                                bias=False),
             nn.BatchNorm2d(gen_size),
             nn.ReLU(True),
-            nn.ConvTranspose2d(gen_size, num_classes,
+            nn.ConvTranspose2d(gen_size, num_channels,
                                kernel_size=4,
                                stride=2,
                                padding=1,
@@ -81,9 +81,9 @@ class Discriminator(nn.Module):
 
     def __init__(self, num_gpu=num_gpus):
         super(Discriminator, self).__init__()
-        self.ngpu = num_gpu
+        self.num_gpu = num_gpu
         self.dis_net = nn.Sequential(
-            nn.Conv2d(num_classes, dis_size,
+            nn.Conv2d(num_channels, dis_size,
                       kernel_size=4,
                       stride=2,
                       padding=1,
