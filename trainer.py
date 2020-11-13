@@ -46,7 +46,7 @@ class Trainer:
 
                 # training the real data.
                 self.dis_net.zero_grad()
-                real_data = partial_data(0).to(self.device)
+                real_data = partial_data[0].to(self.device)
                 batch_size = real_data.size(0)
                 label = torch.full((batch_size,), real_label,
                                    dtype=real_data.dtype,

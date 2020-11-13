@@ -6,9 +6,10 @@
 
 from __future__ import print_function
 from datasets import Dataset
-from config import device, summarize_nets
+from config import device, summarize_nets, num_epochs
 from networks.simple_networks import Generator, Discriminator
 from weights_loader import weights_init
+from trainer import Trainer
 
 # loading dataset
 data_loader = Dataset()
@@ -24,3 +25,8 @@ discriminator.apply(weights_init)
 if summarize_nets:
     print("\t\t\t\t\t******Generator******\n", generator)
     print("\n\t\t\t\t\t******Discriminator******\n", discriminator)
+
+# Training:
+gan_train = Trainer(gen=generator, dis=discriminator, device=device)
+
+gan_train.train(num_iters=num_epochs, data=loaded_data)
