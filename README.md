@@ -17,7 +17,7 @@ Place your data in your data/ folder.
 Register you dataset in the dataset.py.
 add dataset specifications in the config file.
 
-## Rewriting the Neural Networks:
+## Rewriting the neural networks:
 Add your new neural network in the Networks/ folder.
 Use appropriate name for your custom network file.
 Synchronize those changes in the config file.
