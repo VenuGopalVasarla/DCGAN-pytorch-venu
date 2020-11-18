@@ -15,7 +15,7 @@ def save_checkpoint(state_dictionary, name, epoch, output_dir=out_dir):
             A torch ckpt at the output dir.
     """
     file_name = output_dir + '/' + name + '_' + str(epoch) + '.pth'
-    torch.save(self.gen_net.state_dict(), file_name)
+    torch.save(state_dictionary, file_name)
 
     print(f'saved checkpoint of {epoch} epoch to {file_name}')
 

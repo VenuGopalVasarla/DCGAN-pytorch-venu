@@ -87,20 +87,11 @@ class Trainer:
                                                     D_x, D_G_z1, D_G_z2))
                 if i % 100 == 0:
                     save_images(real_data, 'real', epoch)
-                    # vutils.save_image(real_data,
-                    #                   '%s/real_samples.png' % out_dir,
-                    #                   normalize=True)
+
                     fake = self.gen_net(fixed_noise)
                     save_images(fake.detach(), 'fake', epoch)
-                    # vutils.save_image(fake.detach(),
-                    #                   '%s/fake_epoch_%03d.png' % (out_dir,
-                    #                                               epoch),
-                    #                   normalize=True)
-            save_checkpoint(self.gen_net.state_dict(), generator,
+
+            save_checkpoint(self.gen_net.state_dict(), 'generator',
                             epoch)
-            save_checkpoint(self.dis_net.state_dict(), discriminator,
+            save_checkpoint(self.dis_net.state_dict(), 'discriminator',
                             epoch)
-            # torch.save(self.gen_net.state_dict(),
-            #            '%s/netG_epoch_%d.pth' % (out_dir, epoch))
-            # torch.save(self.dis_net.state_dict(),
-            #            '%s/netD_epoch_%d.pth' % (out_dir, epoch))
