@@ -5,7 +5,7 @@ My first implementation of DCGAN architecture
 ### Results obtained from LSUN 'Bridge' data.
 Generated:
 
-![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/fake_epoch_004.png?raw=true)
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/fake_epoch_009.png?raw=true)
 
 Original:
 
