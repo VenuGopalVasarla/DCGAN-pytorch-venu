@@ -1,9 +1,9 @@
-import torchvision.utils as vutils
 import torch.optim as optim
 from torch import nn
 import torch
 from config import loss, optimizer, lr, beta, latent_vector, \
-    batch_size, out_dir
+    batch_size
+from saver import save_checkpoint, save_images
 
 
 class Trainer:
@@ -86,15 +86,21 @@ class Trainer:
                                                     error_gen.item(),
                                                     D_x, D_G_z1, D_G_z2))
                 if i % 100 == 0:
-                    vutils.save_image(real_data,
-                                      '%s/real_samples.png' % out_dir,
-                                      normalize=True)
+                    save_images(real_data, 'real', epoch)
+                    # vutils.save_image(real_data,
+                    #                   '%s/real_samples.png' % out_dir,
+                    #                   normalize=True)
                     fake = self.gen_net(fixed_noise)
-                    vutils.save_image(fake.detach(),
-                                      '%s/fake_epoch_%03d.png' % (out_dir,
-                                                                  epoch),
-                                      normalize=True)
-            torch.save(self.gen_net.state_dict(),
-                       '%s/netG_epoch_%d.pth' % (out_dir, epoch))
-            torch.save(self.dis_net.state_dict(),
-                       '%s/netD_epoch_%d.pth' % (out_dir, epoch))
+                    save_images(fake.detach(), 'fake', epoch)
+                    # vutils.save_image(fake.detach(),
+                    #                   '%s/fake_epoch_%03d.png' % (out_dir,
+                    #                                               epoch),
+                    #                   normalize=True)
+            save_checkpoint(self.gen_net.state_dict(), generator,
+                            epoch)
+            save_checkpoint(self.dis_net.state_dict(), discriminator,
+                            epoch)
+            # torch.save(self.gen_net.state_dict(),
+            #            '%s/netG_epoch_%d.pth' % (out_dir, epoch))
+            # torch.save(self.dis_net.state_dict(),
+            #            '%s/netD_epoch_%d.pth' % (out_dir, epoch))
