@@ -6,9 +6,10 @@
 
 from __future__ import print_function
 from datasets import Dataset
-from config import device, summarize_nets, num_epochs
+from config import device, summarize_nets, num_epochs, gen_ckpt_path, \
+    dis_ckpt_path
 from networks.simple_networks import Generator, Discriminator
-from weights_loader import weights_init
+from weights_loader import weights_init, from_previous_ckpt
 from trainer import Trainer
 
 # loading dataset
@@ -18,9 +19,11 @@ loaded_data = data_loader.get_data()
 # Calling networks
 generator = Generator().to(device)
 generator.apply(weights_init)
+from_previous_ckpt(generator, gen_ckpt_path)
 
 discriminator = Discriminator().to(device)
 discriminator.apply(weights_init)
+from_previous_ckpt(discriminator, dis_ckpt_path)
 
 if summarize_nets:
     print("\t\t\t\t\t******Generator******\n", generator)
