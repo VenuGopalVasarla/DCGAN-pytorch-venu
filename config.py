@@ -34,6 +34,8 @@ optimizer = "adam"  # optimizer to be used. default: Adam
 lr = 0.0002  # learning rate. default: 0.0002
 beta = 0.5  # beta1 value for the optimizer, default: 0.5
 num_epochs = 10  # Number of iterations to be done.
+gen_ckpt_path = "data/results/"  # Path to the pre-trained ckpt if available
+dis_ckpt_path = "data/results/"  # Path to the pre-trained ckpt if available
 
 if CPU:
     device = "cpu"
