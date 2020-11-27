@@ -30,13 +30,14 @@ def from_previous_ckpt(network, checkpoint):
             try:
                 network.load_state_dict(torch.load(checkpoint))
                 print(f"Loaded weights from {checkpoint}")
-            except Exception as e:
-                print(e)
+            except RuntimeError:
                 print(f"{checkpoint} is a invalid checkpoint")
+                print("Neglecting this checkpoint.")
         if os.path.isdir(checkpoint):
             epoch = 0
+            file_name = None
             for ckpt in os.listdir(checkpoint):
-                if ckpt[-3:] == '.pth':
+                if ckpt[-4:] == '.pth':
                     try:
                         tmp_int_list = re.findall('[0-9]+', ckpt)
                         ckpt_epoch = int(tmp_int_list[-1])
@@ -44,16 +45,18 @@ def from_previous_ckpt(network, checkpoint):
                         ckpt_epoch = 0
                     if ckpt_epoch >= epoch:
                         epoch = ckpt_epoch
-                        file_name = os.join(checkpoint, ckpt)
-            if file_name:
+                        file_name = os.path.join(checkpoint, ckpt)
+
+            if file_name is None:
+                print(f"No checkpoint found in {checkpoint}")
+                print("Neglecting this checkpoint.")
+            else:
                 try:
                     network.load_state_dict(torch.load(file_name))
                     print(f"Loaded weights from {file_name}")
-                except Exception as e:
-                    print(e)
+                except (RuntimeError):
                     print(f"{file_name} is a invalid checkpoint")
-            else:
-                print(f"No checkpoint found in {checkpoint}")
+                    print("Neglecting this checkpoint.")
 
     else:
         print(f"the checkpoint path: {checkpoint} doesn't exist.")
