@@ -17,7 +17,7 @@ import torch
 from torchvision import transforms as transforms
 from torchvision import datasets as dset
 from config import dataset, dataset_path, dataset_classes, image_size, \
-    center_crop, batch_size, workers
+    center_crop, batch_size, workers, download_mnist
 
 
 class Dataset:
@@ -47,6 +47,7 @@ class Dataset:
             self.center_crop = center_crop
         else:
             self.center_crop = 64
+        self.download = download_mnist
 
     def get_data(self):
         """
@@ -58,6 +59,12 @@ class Dataset:
 
         elif self.dataset_name == 'lfw':
             dataset = self.lfw()
+
+        elif self.dataset_name == 'mnist':
+            dataset = self.mnist()
+
+        elif self.dataset_name == 'cifar10':
+            dataset = self.cifar10()
 
         else:
             print(f'Invalid dataset name: {self.dataset_name}')
@@ -102,4 +109,31 @@ class Dataset:
                                        transforms.Normalize((0.5, 0.5, 0.5),
                                                             (0.5, 0.5, 0.5)),
                                    ]))
+        return dataset
+
+    def mnist(self):
+        """
+            This method returns a set of 'MNIST' dataset.
+            Please go throuh mnist website for more info.
+        """
+        dataset = dset.MNIST(root=self.data_path, download=self.download,
+                             transform=transforms.Compose([
+                                 transforms.Resize(image_size),
+                                 transforms.ToTensor(),
+                                 transforms.Normalize((0.5,), (0.5,)),
+                             ]))
+        return dataset
+
+    def cifar10(self):
+        """
+            This method returns a set of 'CIFAR10' dataset.
+            Please go throuh cifar10 website for more info.
+        """
+        dataset = dset.CIFAR10(root=self.data_path, download=self.download,
+                               transform=transforms.Compose([
+                                   transforms.Resize(image_size),
+                                   transforms.ToTensor(),
+                                   transforms.Normalize((0.5, 0.5, 0.5),
+                                                        (0.5, 0.5, 0.5)),
+                               ]))
         return dataset
