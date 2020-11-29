@@ -1,16 +1,42 @@
 # DCGAN-pytorch-venu
 My first implementation of DCGAN architecture
 
+## Results on LFW dataset:
+Genenrated:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lfw/out_images/fake_294.png?raw=true)
+
+Original:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lfw/out_images/fake_99.png?raw=true)
+
+## Results on MNIST:
+Generated:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/mnist/out_images/fake_3.png?raw=true)
+
+Original:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/mnist/out_images/real_3.png?raw=true)
+
 ## Results on LSUN dataset:
 ### Results obtained from LSUN 'Bridge' data.
 Generated:
 
-![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/fake_9.png?raw=true)
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lsun/out_images/fake_9.png?raw=true)
 
 Original:
 
-![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/real_samples.png?raw=true)
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lsun/out_images/real_9.png?raw=true)
 
+## Results on CIFAR 10:
+Generated:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/cifar10/out_images/fake_9.png?raw=true)
+
+Original:
+
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/cifar10/out_images/real_9.png?raw=true)
 
 ## Adding your own dataset:
 Place your data in your data/ folder.
