@@ -17,7 +17,7 @@ import torch
 from torchvision import transforms as transforms
 from torchvision import datasets as dset
 from config import dataset, dataset_path, dataset_classes, image_size, \
-     center_crop, batch_size, workers
+    center_crop, batch_size, workers
 
 
 class Dataset:
@@ -55,6 +55,14 @@ class Dataset:
         """
         if self.dataset_name == 'LSUN':
             dataset = self.lsun()
+
+        elif self.dataset_name == 'lfw':
+            dataset = self.lfw()
+
+        else:
+            print(f'Invalid dataset name: {self.dataset_name}')
+            raise Exception('Dataset error: Choose a valid dataset.')
+
         return torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                            shuffle=True,
                                            num_workers=int(workers))
@@ -79,4 +87,19 @@ class Dataset:
                                 transforms.Normalize((0.5, 0.5, 0.5),
                                                      (0.5, 0.5, 0.5)),
                             ]))
+        return dataset
+
+    def lfw(self):
+        """
+            this method returns a set of 'lsw' dataset.
+            Please go through lfw dataset website for more info.
+        """
+        dataset = dset.ImageFolder(root=self.data_path,
+                                   transform=transforms.Compose([
+                                       transforms.Resize(self.image_size),
+                                       transforms.CenterCrop(self.center_crop),
+                                       transforms.ToTensor(),
+                                       transforms.Normalize((0.5, 0.5, 0.5),
+                                                            (0.5, 0.5, 0.5)),
+                                   ]))
         return dataset
