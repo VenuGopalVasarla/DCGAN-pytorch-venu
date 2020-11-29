@@ -8,7 +8,7 @@ Genenrated:
 
 Original:
 
-![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lfw/out_images/fake_99.png?raw=true)
+![Alt text](https://github.com/VenuGopalVasarla/DCGAN-pytorch-venu/blob/main/data/results/lfw/out_images/real_99.png?raw=true)
 
 ## Results on MNIST:
 Generated:
