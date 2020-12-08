@@ -1,8 +1,9 @@
 """
-    This script provides a advanced class for training.
+    Created by Venu Gopal Vasarla.
+    This script provides an advanced class for training.
     Comes with new custom loss functions, different activations.
     Easy to vary the model hyper parameters.
-    Created by Venu Gopal Vasarla.
+
 """
 import torch.optim as optim
 from torch import nn
@@ -16,6 +17,7 @@ class AdvancedTrainer:
     """
         An advanced training class implemented for custom training, losses.
     """
+
     def __init__(self, gen, dis, device):
         self.gen_net = gen
         self.dis_net = dis
