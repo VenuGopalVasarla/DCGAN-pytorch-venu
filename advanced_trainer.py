@@ -11,6 +11,7 @@ import torch
 from config import loss, optimizer, lr, beta, latent_vector, \
     batch_size
 from saver import save_checkpoint, save_images
+from losses import minmax_dis_loss
 
 
 class AdvancedTrainer:
@@ -59,7 +60,8 @@ class AdvancedTrainer:
                                    device=self.device)
 
                 output_tensor = self.dis_net(real_data)
-                error_dis_real = self.loss_fn(output_tensor, label)
+                # error_dis_real = self.loss_fn(output_tensor, label)
+                error_dis_real = minmax_dis_loss(real_output=output_tensor, type='mean')
                 error_dis_real.backward()
                 D_x = output_tensor.mean().item()
 
@@ -69,7 +71,8 @@ class AdvancedTrainer:
                 fake = self.gen_net(noise)
                 label.fill_(fake_label)
                 output_tensor = self.dis_net(fake.detach())
-                error_dis_fake = self.loss_fn(output_tensor, label)
+                # error_dis_fake = self.loss_fn(output_tensor, label)
+                error_dis_fake = minmax_dis_loss(fake_output=output_tensor, type='mean')
                 error_dis_fake.backward()
                 D_G_z1 = output_tensor.mean().item()
 
