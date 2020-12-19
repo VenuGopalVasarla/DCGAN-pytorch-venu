@@ -57,10 +57,10 @@ def minmax_dis_loss(real_output=None, fake_output=None, type='mean', use_noise=F
         labels = load_labels(real_output.size(), is_real=True, use_noise=use_noise)
 
         # cleaning values to replace 0. with 0.000001
-        real_output = torch.where(real_output != 0., real_output, 0.000001)
+        # real_output = torch.where(real_output != 0., real_output, 0.000001)
 
         # implementing Loss formula
-        real_dis_loss = labels * torch.log(real_output)
+        real_dis_loss = max(labels * torch.log(real_output), -100)
         data_present = True
 
     fake_dis_loss = 0
@@ -68,10 +68,10 @@ def minmax_dis_loss(real_output=None, fake_output=None, type='mean', use_noise=F
         labels = load_labels(fake_output.size(), is_real=False, use_noise=use_noise)
 
         # cleaning values to replace 1 with 0.999999
-        fake_output = torch.where(fake_output != 1, fake_output, 0.999999)
+        # fake_output = torch.where(fake_output != 1, fake_output, 0.999999)
 
         # implementing Loss formula
-        fake_dis_loss = labels * torch.log(torch.full(fake_output.shape, 1.) - fake_output)
+        fake_dis_loss = max(labels * torch.log(torch.full(fake_output.shape, 1.) - fake_output), -100)
         data_present = True
 
     if data_present:
